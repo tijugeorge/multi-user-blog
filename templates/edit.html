@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if error %}
+    <div>
+      <p>You might not have the privilege to edit this post</p>
+    </div>
+  {% else %}
+    {% if post %}
+
+      <form method="post">
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" name="subject" class="form-group" id="subject-entry-details" value="{{post.subject}}">
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <textarea class="form-group" name="content" rows="15">{{post.content}}</textarea>
+        </div>
+
+        {% if error %}
+          <div class="alert alert-danger">
+            {{error}}
+          </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-info">Submit</button>
+        <a href="/post/{{post.key().id()}}" type="submit" class="btn btn-danger pull-right">Cancel</a>
+
+      </form>
+
+    {% else %}
+
+      <div>
+        <p>We're sorry, that post is no more available!</p>
+      </div>
+
+    {% endif %}
+  {% endif %}
+
+{% endblock %}
